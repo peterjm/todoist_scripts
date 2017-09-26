@@ -32,6 +32,8 @@ class TitleParser {
   }
 }
 
-module.exports = {
-  TitleParser: TitleParser
+if (typeof(module) != 'undefined') {
+  module.exports = {
+    TitleParser: TitleParser
+  }
 }

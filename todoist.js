@@ -82,6 +82,8 @@ class Todoist {
   }
 }
 
-module.exports = {
-  Todoist: Todoist
-};
+if (typeof(module) != 'undefined') {
+  module.exports = {
+    Todoist: Todoist
+  };
+}
