@@ -7,7 +7,7 @@ class Todoist {
     this.xmlHttpRequest = xmlHttpRequest || new XMLHttpRequest();
   }
 
-  createItem(options) {
+  createItem(options, callback) {
     var content = options.content;
     var url = options.url;
     var date = options.date || "today";
@@ -28,12 +28,16 @@ class Todoist {
           }
         }
       ]
+    }, function(response) {
+      callback(response['temp_id_mapping'][uuid]);
     })
   }
 
-  getItems() {
-    makeRequest({
+  getItems(callback) {
+    this._makeRequest({
       resource_types: ['items']
+    }, function(response) {
+      callback(response['items']);
     });
   }
 
@@ -44,7 +48,7 @@ class Todoist {
     });
   }
 
-  _makeRequest(values) {
+  _makeRequest(values, callback) {
     this.xmlHttpRequest.open('POST', this.url, true);
     this.xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 
@@ -52,7 +56,7 @@ class Todoist {
       var response = JSON.parse(this.responseText);
 
       if (this.status >= 200 && this.status < 400) {
-        console.log(response);
+        callback(response);
       } else {
         // We reached our target server, but it returned an error
         console.log("BAD REQUEST", response);
@@ -80,4 +84,4 @@ class Todoist {
 
 module.exports = {
   Todoist: Todoist
-}
+};
