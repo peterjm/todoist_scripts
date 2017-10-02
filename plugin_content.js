@@ -2,10 +2,10 @@ chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     if (request.message === "clicked_browser_action") {
       var parser = new TitleParser(location, document.title, {
-        githubUsername: GITHUB_USERNAME
+        githubUsername: request.githubUsername
       });
       var title = parser.parseTitle();
-      var todoist = new Todoist(TODOIST_TOKEN, new XMLHttpRequest());
+      var todoist = new Todoist(request.todoistToken, new XMLHttpRequest());
       todoist.createItem({ content: title, url: location.href }, function(id) {
         sendResponse({
           id: id,
