@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "Add to Todoist",
+  "version": "0.1",
+  "permissions": [
+    "notifications"
+  ],
+  "background": {
+    "scripts": ["plugin_background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["todoist_token.js", "todoist.js", "title_parser.js", "plugin_content.js"]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "todoist.png"
+  },
+  "web_accessible_resources": [
+    "todoist.png"
+  ]
+}
