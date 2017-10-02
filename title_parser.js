@@ -1,7 +1,8 @@
 class TitleParser {
-  constructor(location, title) {
+  constructor(location, title, options = {}) {
     this.location = location;
     this.title = title;
+    this.githubUsername = options.githubUsername;
   }
 
   parseTitle() {
@@ -34,7 +35,7 @@ class TitleParser {
 
   _parseGithubPullRequest() {
     var prefix = "PR Review";
-    if (this.title.indexOf("by peterjm") > 0) {
+    if (this.githubUsername && this.title.indexOf(" by "+this.githubUsername) > 0) {
       prefix = "PR";
     }
     return "[" + prefix + "] " + this._titleBefore(/ by \w+ · /);

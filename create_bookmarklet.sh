@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 ./node_modules/uglify-es/bin/uglifyjs \
-  todoist_token.js \
+  private_values.js \
   title_parser.js \
   todoist.js \
   bookmarklet.js \
