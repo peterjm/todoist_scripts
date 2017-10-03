@@ -38,7 +38,7 @@ class TitleParser {
     if (this.githubUsername && this.title.indexOf(" by "+this.githubUsername) > 0) {
       prefix = "PR";
     }
-    return "[" + prefix + "] " + this._titleBefore(/ by \w+ · /);
+    return "[" + prefix + "] " + this._titleBefore(/ by [\w-]+ · /);
   }
 
   _parseGithubIssue() {
